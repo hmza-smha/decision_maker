@@ -46,7 +46,7 @@ class DecisionMakerSvc:
 
 
     def __validate_steps(self):
-        required_keys = ['order', 'content', 'group']
+        required_keys = ['order', 'content', 'group', 'type']
         for i, d in enumerate(self.steps):
             for key in required_keys:
                 if key not in d:

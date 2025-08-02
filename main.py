@@ -1,9 +1,11 @@
 import os
+import traceback
+import uvicorn
 from fastapi import FastAPI, Depends, HTTPException, status, Security, Request
 from fastapi.security.api_key import APIKeyHeader
 from dotenv import load_dotenv
-
-from services.decision_maker_svc import DecisionMakerSvc, Step
+from fastapi.responses import JSONResponse
+from services.decision_maker_svc import DecisionMakerSvc
 load_dotenv()
 
 API_SECRET_KEY = os.getenv("API_SECRET_KEY")
@@ -30,4 +32,15 @@ def buildDecisionSteps(steps: list[dict]):
         decisionMakerSvc = DecisionMakerSvc(steps=steps)
         return decisionMakerSvc.get_steps_with_decisions()
     except Exception as e:
-        raise HTTPException(status_code=400, detail=str(e))
+        tb = traceback.format_exc()
+        return JSONResponse(
+            status_code=400,
+            content={
+                "error": str(e),
+                "stacktrace": tb
+            }
+        )
+
+
+if __name__ == "__main__":
+    uvicorn.run(app)
