@@ -4,6 +4,9 @@ from openai import OpenAI
 def call_openai(input: str, is_json_response: bool = False):
     client = OpenAI()
 
+    if is_json_response:
+        input += ' Remember your answer must be in valid JSON format'
+        
     response = client.responses.create(
         model="gpt-4.1",
         input=input
