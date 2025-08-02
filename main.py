@@ -27,8 +27,8 @@ def get_api_key(api_key: str = Security(api_key_header)):
     )
 
 
-@app.post("/", tags=['APIs'])
-def buildDecisionSteps():
+@app.get("/", tags=['APIs'])
+def health():
     return {
         "health": "Ok",
         "version": "0.1.0"
