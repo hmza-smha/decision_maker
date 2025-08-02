@@ -26,6 +26,15 @@ def get_api_key(api_key: str = Security(api_key_header)):
         detail="Error: 401 - Invalid or missing API key",
     )
 
+
+@app.post("/", tags=['APIs'])
+def buildDecisionSteps():
+    return {
+        "health": "Ok",
+        "version": "0.1.0"
+    }
+
+
 @app.post("/api/v1/buildDecisionSteps", tags=['APIs'], dependencies=[Depends(get_api_key)])
 def buildDecisionSteps(steps: list[dict]):
     try:
