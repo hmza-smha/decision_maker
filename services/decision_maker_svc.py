@@ -117,13 +117,14 @@ class DecisionMakerSvc:
 
     def _step_group_prompt(self) -> str:
         return """
-Classify the following task into one of the given groups.
+The given task involves a decision. Classify the group responsible for making that decision.  
+Your classification must be one of the available groups.  
 Respond with only the group name — no explanation or extra words.
 
-Task:
+Task:  
 {task}
 
-Available Groups:
+Available Groups:  
 {groups}
 """
 
