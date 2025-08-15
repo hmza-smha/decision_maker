@@ -16,4 +16,5 @@ def call_openai(input: str, is_json_response: bool = False):
         response = response.output_text.replace('```', '')
         return json.loads(response)
     
+    print('Calling OpenAI....')
     return response.output_text    
